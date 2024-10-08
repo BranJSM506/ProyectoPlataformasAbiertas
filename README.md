@@ -1,7 +1,6 @@
 # ProyectoPlataformasAbiertas
 Integrantes: 
-Meybel Ajú Castro
-Brandon Serrano Morales
+Meybel Ajú Castro, Brandon Serrano Morales
 
 Descripción:
 Este proyecto se basa en la creación de un sistema para una tienda de ropa que cuente con base de datos en la cual se realice el registro de ventas incluyendo la fecha, se pueda conocer la cantidad de prendas que hay en stock y la obtención de las marcas más vendidas.
