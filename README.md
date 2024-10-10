@@ -7,4 +7,4 @@ Este proyecto se basa en la creación de un sistema para una tienda de ropa que 
 
 Diagrama de la base de datos
 ![image](https://github.com/user-attachments/assets/794a5704-a2eb-4f9b-95fa-7dc98150dcd9)
-
+Presentado el 09/10/2024. 
