@@ -28,8 +28,8 @@ if($path == "prendas")
     switch($method) {
         
         case  'GET':
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/libros?id=1
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/libros
+            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id=1
+            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas
             // Extraemos los parámetros de la consulta
             $id = isset($queryParams['id']) ? $queryParams['id'] : null;
         
@@ -46,19 +46,19 @@ if($path == "prendas")
         
         case 'POST':
 
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/libros
+            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas
             $prendasController->crear();
 
             break;
 
         case 'DELETE':
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/libros?id=1
+            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id=1
             $id = isset($queryParams['id']) ? $queryParams['id'] : null;
             $prendasController->eliminar($id);
             break;
 
         case 'PUT':
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/libros?id=1
+            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id=1
             $id = isset($queryParams['id']) ? $queryParams['id'] : null;
             $prendasController->actualizar($id);
             break;
@@ -89,7 +89,7 @@ if($path == "saludo")
             break;
 
         default:
-            echo "Metodo no implementado todavia para saludo.";
+            echo "Metodo no implementado aún.";
 
 
     }
