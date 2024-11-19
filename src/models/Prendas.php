@@ -11,17 +11,7 @@ class Prendas {
 
     // Método para obtener todas las prendas
     public function getAll() {
-        $consulta = $this->db->connect()->query("SELECT * FROM prendas"); ///////
-
-        /////////////////// sql con el join y el concat
-        ///////////////////
-        ///////////////////
-        ///////////////////
-        ///////////////////
-        ///////////////////
-        ///////////////////
-///////////////////
-        ///////////////////
+        $consulta = $this->db->connect()->query("SELECT * FROM prendas");
         return $consulta->fetchAll();
     }
 
@@ -73,19 +63,19 @@ public function UpdateNombre($id, $data){
 
     // Métodos para los reportes usando vistas
 
-    // Obtener reporte de marcas con ventas
+    // Obtiene reporte de marcas con ventas
     public function reporteMarcasConVentas() {
         $consulta = $this->db->connect()->query("SELECT * FROM marcasconventas");
         return $consulta->fetchAll();
     }
 
-    // Obtener reporte de prendas vendidas y stock
+    // Obtiene reporte de prendas vendidas y stock
     public function reportePrendasVendidasYStock() {
         $consulta = $this->db->connect()->query("SELECT * FROM prendasvendidasystock");
         return $consulta->fetchAll();
     }
 
-    // Obtener reporte de las 5 marcas más vendidas
+    // Obtiene reporte de las 5 marcas más vendidas
     public function reporteTop5MarcasVendidas() {
         $consulta = $this->db->connect()->query("SELECT * FROM top5marcasvendidas");
         return $consulta->fetchAll();
