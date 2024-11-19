@@ -1,120 +1,140 @@
-<?php
+<?php 
 
 require_once "../src/controllers/PrendasController.php";
-
-//http://localhost/ProyectoPlataformasAbiertas/public/index.php/saludo
+require_once "../src/controllers/MarcasController.php";
+require_once "../src/controllers/VentasController.php";
 
 $method = $_SERVER["REQUEST_METHOD"];
-
-
-//$path = trim($_SERVER["PATH_INFO"], '/');
 $path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], '/') : '';
-
-
 $segmentos = explode("/", $path);
-
-
 $queryString = $_SERVER['QUERY_STRING'];
-
-
 parse_str($queryString, $queryParams);
 
+// Rutas para "prendas"
+if ($path == "prendas") {
+    $prendasController = new PrendasController();
 
-
-
-if($path == "prendas")
-{
-    $prendasController = new prendasController();
-    switch($method) {
-        
-        case  'GET':
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id=1
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas
-            // Extraemos los parámetros de la consulta
+    switch ($method) {
+        case 'GET':
             $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-        
 
-           if($id != null)
-           {
-              $prendasController->ObtenerPorId($id);
-           }
-           else
-           {
-            $prendasController->ObtenerTodos();
-           }
+            if ($id !== null) {
+                $prendasController->ObtenerPorId($id);
+            } else {
+                $prendasController->ObtenerTodos();
+            }
             break;
-        
+
         case 'POST':
-
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas
             $prendasController->crear();
+            break;
 
+        case 'PUT':
+            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
+            $prendasController->actualizar($id);
             break;
 
         case 'DELETE':
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id=1
             $id = isset($queryParams['id']) ? $queryParams['id'] : null;
             $prendasController->eliminar($id);
             break;
 
-        case 'PUT':
-            //http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id=1
+        default:
+            echo json_encode(["Error" => "Método no implementado para prendas."]);
+    }
+}
+
+// Rutas para "marcas"
+if ($path == "marcas") {
+    $marcasController = new MarcasController();
+
+    switch ($method) {
+        case 'GET':
             $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-            $prendasController->actualizar($id);
-            break;
-        default:
-            echo json_encode(["Error" => "Metodo no implementado todavia para prendas." ]);
 
-    }
-
-}
-
-
-if($path == "saludo")
-{
-
-    switch($method) {
-        case  'GET':
-
-            if($nombre != "")
-            {
-              // echo "Saludo ". $nombre;
-                echo json_encode(['Alert' => 'LLamando get de prueba2']);
+            if ($id !== null) {
+                $marcasController->ObtenerPorId($id);
+            } else {
+                $marcasController->ObtenerTodos();
             }
-            else
-            {
-                echo json_encode(['Alert' => 'LLamando get de prueba3']);
+            break;
+
+        case 'POST':
+            $marcasController->crear();
+            break;
+
+        case 'PUT':
+            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
+            $marcasController->actualizar($id);
+            break;
+
+        case 'DELETE':
+            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
+            $marcasController->eliminar($id);
+            break;
+
+        default:
+            echo json_encode(["Error" => "Método no implementado para marcas."]);
+    }
+}
+
+// Rutas para "ventas"
+if ($path == "ventas") {
+    $ventasController = new VentasController();
+
+    switch ($method) {
+        case 'GET':
+            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
+
+            if ($id !== null) {
+                $ventasController->ObtenerPorId($id);
+            } else {
+                $ventasController->ObtenerTodos();
             }
-          
+            break;
+
+        case 'POST':
+            $ventasController->crear();
+            break;
+
+        case 'PUT':
+            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
+            $ventasController->actualizar($id);
+            break;
+
+        case 'DELETE':
+            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
+            $ventasController->eliminar($id);
             break;
 
         default:
-            echo "Metodo no implementado aún.";
-
-
+            echo json_encode(["Error" => "Método no implementado para ventas."]);
     }
-
+}
+if ($path == "vistas/marcasconventas") {
+    if ($method == 'GET') {
+        $prendasController = new PrendasController();
+        $prendasController->reporteMarcasConVentas();
+    } else {
+        echo json_encode(["Error" => "Método no permitido para esta ruta."]);
+    }
 }
 
-
-
-if($path == "reportes")
-{
-
-    switch($method) {
-        case  'GET':
-
-         
-            echo json_encode(["Resultado" =>  "top 5 marcas"]);
-          
-            break;
-
-        default:
-            echo json_encode(["Error" => "llamando al get de libros" ]);
-
+if ($path == "vistas/prendasvendidasystock") {
+    if ($method == 'GET') {
+        $prendasController = new PrendasController();
+        $prendasController->reportePrendasVendidasYStock();
+    } else {
+        echo json_encode(["Error" => "Método no permitido para esta ruta."]);
     }
-
 }
 
-
+if ($path == "vistas/top5marcasvendidas") {
+    if ($method == 'GET') {
+        $prendasController = new PrendasController();
+        $prendasController->reporteTop5MarcasVendidas();
+    } else {
+        echo json_encode(["Error" => "Método no permitido para esta ruta."]);
+    }
+}
 ?>
