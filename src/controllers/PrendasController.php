@@ -3,33 +3,33 @@ require_once '../src/models/Prendas.php';
 
 class PrendasController {
 
-    // Obtener todas las prendas
-    public function obtenerTodas() {
+    // Obtiene todas las prendas
+    public function ObtenerTodos() {
         $modeloPrendas = new Prendas();
         echo json_encode(["Resultado" => $modeloPrendas->getAll()]);
     }
 
-    // Obtener una prenda específica por ID
-    public function obtenerPorId($id) {
+    // Obtiene una prenda específica por ID
+    public function ObtenerPorId($id) {
         $modeloPrendas = new Prendas();
         echo json_encode(["Resultado" => $modeloPrendas->getById($id)]);
     }
 
-    // Crear una nueva prenda
+    // Crea una nueva prenda
     public function crear() {
         $data = json_decode(file_get_contents("php://input"), true);
         $modeloPrendas = new Prendas();
         echo json_encode(["Resultado" => $modeloPrendas->create($data)]);
     }
 
-    // Actualizar una prenda existente
+    // Actualiza una prenda existente
     public function actualizar($id) {
         $data = json_decode(file_get_contents("php://input"), true);
         $modeloPrendas = new Prendas();
         echo json_encode(["Resultado" => $modeloPrendas->update($id, $data)]);
     }
 
-    // Eliminar una prenda por su ID
+    // Elimina una prenda por su ID
     public function eliminar($id) {
         $modeloPrendas = new Prendas();
         echo json_encode(["Resultado" => $modeloPrendas->delete($id)]);
