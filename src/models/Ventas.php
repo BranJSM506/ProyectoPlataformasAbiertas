@@ -16,7 +16,7 @@ class Ventas {
 
     // Obtiene una venta por su ID
     public function getById($id) {
-        $consulta = $this->db->connect()->prepare("SELECT * FROM ventas WHERE id_prenda = ?");
+        $consulta = $this->db->connect()->prepare("SELECT * FROM ventas WHERE id_venta = ?");
         $consulta->execute([$id]);
         return $consulta->fetch();
     }
@@ -33,7 +33,7 @@ class Ventas {
     // Actualiza una venta por su ID
     public function update($id, $data) {
         $consulta = $this->db->connect()->prepare(
-            "UPDATE ventas SET cantidad = ?, fecha_venta = ? WHERE id_prenda = ?"
+            "UPDATE ventas SET cantidad = ?, fecha_venta = ? WHERE id_venta = ?"
         );
         $consulta->execute([$data['cantidad'], $data['fecha_venta'], $id]);
         return $consulta->rowCount();
@@ -41,7 +41,7 @@ class Ventas {
 
     // Elimina una venta por su ID
     public function delete($id) {
-        $consulta = $this->db->connect()->prepare("DELETE FROM ventas WHERE id_prenda = ?");
+        $consulta = $this->db->connect()->prepare("DELETE FROM ventas WHERE id_venta = ?");
         $consulta->execute([$id]);
         return $consulta->rowCount();
     }
