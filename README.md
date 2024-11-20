@@ -225,7 +225,8 @@ En este caso nos presenta el ID de la venta que hemos agregado.
 {"Resultado":1}
    ```
 Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción realizada, en caso de prensentar un 0 es que el cambio no se realizó.
-  11.Endpoint para obtener todas las marcas
+
+11.Endpoint para obtener todas las marcas
   - Método:GET
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas
   - Descripción: Obtiene todas las marcas que se encuentran almacenadas en la base de datos
@@ -247,7 +248,8 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
     ]
 }
    ```
-  12.Endpoint para obtener marcas por id
+
+12.Endpoint para obtener marcas por id
   - Método:GET
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
   - Descripción: Obtiene las marcas que se deseen consultar por medio del ID de la marca
@@ -264,7 +266,8 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
     }
 }
    ```
-  13.Endpoint para actualizar marcas
+
+13.Endpoint para actualizar marcas
   - Método: PUT 
   - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
   - Descripción:  Actualiza la información de una marca en específico indicado por el id de la marca. 
@@ -285,7 +288,8 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
    }
    ```
 Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción realizada, en caso de prensentar un 0 es que el cambio no se realizó.
-  14.Endpoint para crear marcas
+
+14.Endpoint para crear marcas
   - Método: POST
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas
   - Descripción: Permite el ingresar una nueva marca en la tabla de la base de datos.
@@ -304,7 +308,8 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
 {"Resultado":"13"}
    ```
 En este caso nos presenta el ID del marca que hemos agregado.
-  15.Endpoint para eliminar marcas
+
+15.Endpoint para eliminar marcas
   - Método:DELETE
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
   - Descripción: Elimina una marca de acuerdo al ID indicado. 
