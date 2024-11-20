@@ -192,7 +192,8 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
    }
    ```
 Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción realizada, en caso de prensentar un 0 es que el cambio no se realizó.
-  9.Endpoint para crear ventas
+
+9.Endpoint para crear ventas
   - Método: POST
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas
   - Descripción: Permite el ingresar una nueva venta en la tabla de la base de datos.
