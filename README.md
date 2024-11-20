@@ -45,7 +45,7 @@ Este proyecto se basa en la creación de un sistema para una tienda de ropa que 
   - Descripción: Obtiene las prendas que se deseen consultar por medio del ID de la prenda
   
     ```http
-     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id=5
+     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={id}
      ```
     Ejemplo de respuesta:
  ```json
@@ -61,10 +61,10 @@ Este proyecto se basa en la creación de un sistema para una tienda de ropa que 
    ```
   3.Endpoint para actualizar prendas
   - Método: PUT 
-  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número de ID de la prenda}
+  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número_de_ID_de_la_prenda}
   - Descripción:  Actualiza la información de una prenda en específico indicado por el id de la prenda. 
    ```http
-   PUT http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número de ID de la prenda}
+   PUT http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número_de_ID_de_la_prenda}
    ```
 
    Cuerpo de la petición (JSON):
@@ -108,10 +108,10 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
 En este caso nos presenta el ID del producto que hemos agregado.
   5.Endpoint para eliminar prendas
   - Método:DELETE
-  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número de ID de la prenda}
-  - Descripción
+  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número_de_ID_de_la_prenda}
+  - Descripción: Elimina una prenda por medio de su ID
    ```http
-   DELETE http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número de ID de la prenda}
+   DELETE http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número_de_ID_de_la_prenda}
    ```
    Ejemplo de respuesta:
    ```json
@@ -122,9 +122,9 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
   6.Endpoint para obtener todas las ventas
   - Método:GET
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas
-  - Descripción: Obtiene todas las ventas qu se encuentran almacenadas en la tabla ventas de la base de datos
+  - Descripción: Obtiene todas las ventas que se encuentran almacenadas en la tabla ventas de la base de datos
       ```http
-     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas
+     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas
      ```
     Ejemplo de respuesta:
  ```json
@@ -147,10 +147,10 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
    ```
   7.Endpoint para obtener ventas por id
   - Método: GET
-  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={Número de ID de la prenda que se vendió}
-  - Descripción: Obtiene la venta que se deseen consultar por medio del ID de la prenda que se vendió, además de proporcionar datos como la fecha, la cantidad de artículos comprados y un id de venta.
+  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={Número_de-ID_de_la_prenda_que_se_vendió}
+  - Descripción: Obtiene la venta que se deseen consultar por medio del ID de la venta, además de proporcionar datos como la fecha, la cantidad de artículos comprados y id de la prenda.
       ```http
-     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={Número de ID de la prenda que se vendió}
+     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={Número_de-ID_de_la_prenda_que_se_vendió}
      ```
     Ejemplo de respuesta:
  ```json
@@ -165,10 +165,10 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
    ```
   8.Endpoint para actualizar ventas
   - Método: PUT 
-  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número de ID de la prenda}
-  - Descripción:  Actualiza la información de una venta en específico indicado por el id de la prenda. 
+  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número_de-ID_de_la_venta}
+  - Descripción:  Actualiza la información de una venta en específico indicado por el id de la venta. 
    ```http
-   PUT http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número de ID de la prenda}
+   PUT http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número_de-ID_de_la_venta}
    ```
 
    Cuerpo de la petición (JSON):
@@ -213,10 +213,10 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
 En este caso nos presenta el ID de la venta que hemos agregado.
   10.Endpoint para eliminar ventas
   - Método:DELETE
-  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número de ID de la prenda}
-  - Descripción
+  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número_de_ID_de_la_venta}
+  - Descripción: Elimina una venta por medio de su ID
    ```http
-   DELETE http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número de ID de la prenda}
+   DELETE http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número_de_ID_de_la_venta}
    ```
    Ejemplo de respuesta:
    ```json
@@ -247,11 +247,11 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
    ```
   12.Endpoint para obtener marcas por id
   - Método:GET
-  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número de ID de la marca}
+  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
   - Descripción: Obtiene las marcas que se deseen consultar por medio del ID de la marca
   
     ```http
-     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/marca?id={número de ID de la marca}
+     GET http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
      ```
     Ejemplo de respuesta:
  ```json
@@ -264,10 +264,10 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
    ```
   13.Endpoint para actualizar marcas
   - Método: PUT 
-  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número de ID de la marca}
+  - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
   - Descripción:  Actualiza la información de una marca en específico indicado por el id de la marca. 
    ```http
-   PUT http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número de ID de la marca}
+   PUT http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
    ```
 
    Cuerpo de la petición (JSON):
@@ -304,10 +304,10 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
 En este caso nos presenta el ID del marca que hemos agregado.
   15.Endpoint para eliminar marcas
   - Método:DELETE
-  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número de ID de la marca}
-  - Descripción
+  - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
+  - Descripción: Elimina una marca de acuerdo al ID indicado. 
    ```http
-   DELETE http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número de ID de la marca}
+   DELETE http://localhost/ProyectoPlataformasAbiertas/public/index.php/marcas?id={número_de_ID_de_la_marca}
    ```
    Ejemplo de respuesta:
    ```json
