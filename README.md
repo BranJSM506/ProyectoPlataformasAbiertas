@@ -11,7 +11,7 @@ Este proyecto se basa en la creación de un sistema para una tienda de ropa que 
 
   ##API con CRUD
 
-  1.Endpoint para obtener todas las prendas
+1.Endpoint para obtener todas las prendas
   - Método:GET
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas
   - Descripción: Obtiene todas las prendas que se encuentran almacenadas en la base de datos
@@ -39,7 +39,8 @@ Este proyecto se basa en la creación de un sistema para una tienda de ropa que 
     ]
 }
    ```
-  2.Endpoint para obtener prendas por id
+
+2.Endpoint para obtener prendas por id
   - Método:GET
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={id}
   - Descripción: Obtiene las prendas que se deseen consultar por medio del ID de la prenda
@@ -59,7 +60,8 @@ Este proyecto se basa en la creación de un sistema para una tienda de ropa que 
     }
 }
    ```
-  3.Endpoint para actualizar prendas
+
+3.Endpoint para actualizar prendas
   - Método: PUT 
   - Endpoint:http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número_de_ID_de_la_prenda}
   - Descripción:  Actualiza la información de una prenda en específico indicado por el id de la prenda. 
@@ -84,7 +86,8 @@ Este proyecto se basa en la creación de un sistema para una tienda de ropa que 
    ```
 Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción realizada, en caso de prensentar un 0 es que el cambio no se realizó.
 
-  4.Endpoint para crear prendas
+
+4.Endpoint para crear prendas
   - Método: POST
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas
   - Descripción: Permite el ingresar una nueva prenda en la tabla de la base de datos.
