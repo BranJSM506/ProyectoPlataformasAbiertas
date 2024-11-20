@@ -24,18 +24,18 @@ class Ventas {
     // Crea una nueva venta
     public function create($data) {
         $consulta = $this->db->connect()->prepare(
-            "INSERT INTO ventas (id_prenda, cantidad, fecha_ventas) VALUES (?, ?, ?)"
+            "INSERT INTO ventas (id_prenda, cantidad, fecha_venta) VALUES (?, ?, ?)"
         );
-        $consulta->execute([$data['id_prenda'], $data['cantidad'], $data['fecha_ventas']]);
+        $consulta->execute([$data['id_prenda'], $data['cantidad'], $data['fecha_venta']]);
         return $this->db->connect()->lastInsertId();
     }
 
     // Actualiza una venta por su ID
     public function update($id, $data) {
         $consulta = $this->db->connect()->prepare(
-            "UPDATE ventas SET cantidad = ?, fecha_ventas = ? WHERE id_prenda = ?"
+            "UPDATE ventas SET cantidad = ?, fecha_venta = ? WHERE id_prenda = ?"
         );
-        $consulta->execute([$data['cantidad'], $data['fecha_ventas'], $id]);
+        $consulta->execute([$data['cantidad'], $data['fecha_venta'], $id]);
         return $consulta->rowCount();
     }
 
