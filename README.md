@@ -212,7 +212,8 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
 {"Resultado":"176"}
    ```
 En este caso nos presenta el ID de la venta que hemos agregado.
-  10.Endpoint para eliminar ventas
+  
+10.Endpoint para eliminar ventas
   - Método:DELETE
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/ventas?id={número_de_ID_de_la_venta}
   - Descripción: Elimina una venta por medio de su ID
