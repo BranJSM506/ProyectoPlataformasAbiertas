@@ -106,7 +106,7 @@ Esto nos indica que realizó el cambio ya que al ser 1 es cambio o acción reali
 {"Resultado":"33"}
    ```
 En este caso nos presenta el ID del producto que hemos agregado.
-  5.Endpoint para eliminar prendas
+5.Endpoint para eliminar prendas
   - Método:DELETE
   - Endpoint: http://localhost/ProyectoPlataformasAbiertas/public/index.php/prendas?id={número_de_ID_de_la_prenda}
   - Descripción: Elimina una prenda por medio de su ID
