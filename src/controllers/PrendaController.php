@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/Prenda.php';
+require_once __DIR__ . '/../module/Prenda.php';
 
 class PrendaController {
     private $model;
