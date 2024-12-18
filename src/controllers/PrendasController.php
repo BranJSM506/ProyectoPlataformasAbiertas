@@ -1,58 +1,72 @@
 <?php
-require_once '../src/models/Prendas.php';
+require_once __DIR__ . '/../models/Prenda.php';
 
-class PrendasController {
+class PrendaController {
+    private $model;
+    private $conn;
 
-    // Obtiene todas las prendas
-    public function ObtenerTodos() {
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->getAll()]);
+    public function __construct() {
+        $database = new Database();
+        $this->conn = $database->getConnection();
+        $this->model = new Prenda($this->conn);
     }
 
-    // Obtiene una prenda específica por ID
-    public function ObtenerPorId($id) {
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->getById($id)]);
+    public function get($id = null) {
+        if ($id) {
+            echo json_encode($this->model->find($id));
+        } else {
+            echo json_encode($this->model->all());
+        }
     }
 
-    // Crea una nueva prenda
-    public function crear() {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->create($data)]);
+    public function post() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $nombre = $data['nombre'];
+    
+        // Comprobar si el nombre de la prenda ya existe
+        if ($this->model->existsByName($nombre)) {
+            echo json_encode(['error' => 'La prenda ya existe.']);
+            http_response_code(400); // Bad Request
+            return;
+        }
+    
+        echo json_encode($this->model->create($data));
+    }
+    
+    public function put($id) {
+        $data = json_decode(file_get_contents('php://input'), true);
+        $nombre = $data['nombre'];
+    
+        // Comprobar si el nombre de la prenda ya existe para otra prenda
+        $existingPrenda = $this->model->existsByName($nombre);
+        if ($existingPrenda && $existingPrenda['PrendaID'] != $id) {
+            echo json_encode(['error' => 'La prenda ya existe.']);
+            http_response_code(400); // Bad Request
+            return;
+        }
+    
+        echo json_encode($this->model->update($id, $data));
+    }
+    
+
+    public function delete($id) {
+        echo json_encode($this->model->delete($id));
     }
 
-    // Actualiza una prenda existente
-    public function actualizar($id) {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->update($id, $data)]);
+    public function getPrendasVendidas() {
+        $query = "SELECT p.PrendaID, p.MarcaID, p.Nombre, p.Precio, p.Stock, 
+                         SUM(v.Cantidad) as cantidad_vendida, 
+                         (p.Stock - SUM(v.Cantidad)) as stock_restante
+                  FROM prendas p
+                  JOIN ventas v ON p.PrendaID = v.PrendaID
+                  GROUP BY p.PrendaID";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        echo json_encode($result);
     }
-
-    // Elimina una prenda por su ID
-    public function eliminar($id) {
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->delete($id)]);
-    }
-
-    // Métodos para generar reportes usando las vistas
-
-    // Reporte de marcas con ventas
-    public function reporteMarcasConVentas() {
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->reporteMarcasConVentas()]);
-    }
-
-    // Reporte de prendas vendidas y stock
-    public function reportePrendasVendidasYStock() {
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->reportePrendasVendidasYStock()]);
-    }
-
-    // Reporte de las 5 marcas más vendidas
-    public function reporteTop5MarcasVendidas() {
-        $modeloPrendas = new Prendas();
-        echo json_encode(["Resultado" => $modeloPrendas->reporteTop5MarcasVendidas()]);
-    }
+    
 }
 ?>
+
+
