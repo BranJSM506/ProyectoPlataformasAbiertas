@@ -1,3 +1,3 @@
 <?php
-require '../src/routes.php';
+require '../API/routes.php';
 ?>
