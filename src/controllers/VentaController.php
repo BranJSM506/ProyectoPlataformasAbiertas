@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../models/Venta.php';
+require_once __DIR__ . '/../module/Venta.php';
 
 class VentaController {
     private $model;
