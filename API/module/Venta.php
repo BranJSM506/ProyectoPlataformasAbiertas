@@ -1,5 +1,5 @@
 <?php
-require_once '../src/db/Database.php';
+require_once '../API/db/Database.php';
 
 class Venta {
     private $db;
