@@ -1,30 +1,22 @@
 <?php
-
 class Database {
-    private static $pdo = null;
+    private $host = "localhost";
+    private $db_name = "tiendaropa_proyecto_mb";
+    private $username = "root";
+    private $password = "";
+    public $conn;
 
-    public static function connect() {
-        if (self::$pdo === null) {
-            $host = 'localhost'; 
-            $db   = 'tiendaropa_proyecto_mb'; 
-            $user = 'root';
-            $pass = '';
-            $charset = 'utf8mb4';
-
-            $dsn = "mysql:host=$host;dbname=$db;charset=$charset";
-            $options = [
-                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-                PDO::ATTR_EMULATE_PREPARES   => false,
-            ];
-
-            try {
-                self::$pdo = new PDO($dsn, $user, $pass, $options);
-            } catch (\PDOException $e) {
-                throw new \PDOException($e->getMessage(), (int)$e->getCode());
-            }
+    public function getConnection() {
+        $this->conn = null;
+        try {
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username, $this->password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+            $this->conn->exec("set names utf8"); 
+        } catch(PDOException $exception) {
+            echo "Error de conexión: " . $exception->getMessage();
         }
-        return self::$pdo;
+        return $this->conn;
     }
 }
+
 ?>
