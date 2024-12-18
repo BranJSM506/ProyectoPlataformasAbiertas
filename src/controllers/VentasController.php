@@ -1,38 +1,33 @@
 <?php
-require_once '../src/models/Ventas.php';
+require_once __DIR__ . '/../models/Venta.php';
 
-class VentasController {
-    // Obtiene todas las ventas
-    public function ObtenerTodos() {
-        $modeloVentas = new Ventas();
-        echo json_encode(["Resultado" => $modeloVentas->getAll()]);
+class VentaController {
+    private $model;
+
+    public function __construct() {
+        $this->model = new Venta();
     }
 
-    // Obtiene una venta específica por ID
-    public function ObtenerPorId($id) {
-        $modeloVentas = new Ventas();
-        echo json_encode(["Resultado" => $modeloVentas->getById($id)]);
+    public function get($id = null) {
+        if ($id) {
+            echo json_encode($this->model->find($id));
+        } else {
+            echo json_encode($this->model->all());
+        }
     }
 
-    // Crea una nueva venta
-    public function crear() {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $modeloVentas = new Ventas();
-        echo json_encode(["Resultado" => $modeloVentas->create($data)]);
+    public function post() {
+        $data = json_decode(file_get_contents('php://input'), true);
+        echo json_encode($this->model->create($data));
     }
 
-    // Actualiza una venta existente
-    public function actualizar($id) {
-        $data = json_decode(file_get_contents("php://input"), true);
-        $modeloVentas = new Ventas();
-        echo json_encode(["Resultado" => $modeloVentas->update($id, $data)]);
+    public function put($id) {
+        $data = json_decode(file_get_contents('php://input'), true);
+        echo json_encode($this->model->update($id, $data));
     }
 
-    // Elimina una venta por su ID
-    public function eliminar($id) {
-        $modeloVentas = new Ventas();
-        echo json_encode(["Resultado" => $modeloVentas->delete($id)]);
+    public function delete($id) {
+        echo json_encode($this->model->delete($id));
     }
 }
-
 ?>
