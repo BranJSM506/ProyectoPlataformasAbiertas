@@ -1,140 +1,99 @@
-<?php 
+<?php
+require_once __DIR__ . '/controllers/MarcaController.php';
+require_once __DIR__ . '/controllers/PrendaController.php';
+require_once __DIR__ . '/controllers/VentaController.php';
 
-require_once "../src/controllers/PrendasController.php";
-require_once "../src/controllers/MarcasController.php";
-require_once "../src/controllers/VentasController.php";
+$marcaController = new MarcaController();
+$prendaController = new PrendaController();
+$ventaController = new VentaController();
 
-$method = $_SERVER["REQUEST_METHOD"];
-$path = isset($_SERVER["PATH_INFO"]) ? trim($_SERVER["PATH_INFO"], '/') : '';
-$segmentos = explode("/", $path);
-$queryString = $_SERVER['QUERY_STRING'];
-parse_str($queryString, $queryParams);
+$request_method = $_SERVER['REQUEST_METHOD'];
+//var_dump($_SERVER);
+$path = isset($_SERVER['PATH_INFO']) ? trim($_SERVER['PATH_INFO'], '/') : '';
+$segmentosDeUrl = explode('/', $path);
 
-// Rutas para "prendas"
-if ($path == "prendas") {
-    $prendasController = new PrendasController();
+$rutaControlador = array_shift($segmentosDeUrl);
+$id = !empty($segmentosDeUrl) ? end($segmentosDeUrl) : null;
+//var_dump($rutaControlador);
+switch ($rutaControlador) {
+    case 'marcas':
+        switch ($request_method) {
+            case 'GET':
+                if (isset($segmentosDeUrl[0]) && $segmentosDeUrl[0] == 'conVentas') {
+                    $marcaController->getMarcasConVentas();
+                } elseif (isset($segmentosDeUrl[0]) && $segmentosDeUrl[0] == 'top5') {
+                    $marcaController->getTop5Marcas();
+                } elseif (isset($_GET['nombre'])) {
+                    $nombre = $_GET['nombre'];
+                    echo json_encode(['exists' => $marcaController->checkMarcaNombre($nombre)]);
+                } else {
+                    $marcaController->get($id);
+                }
+                break;
+            case 'POST':
+                $marcaController->post();
+                break;
+            case 'PUT':
+                $marcaController->put($id);
+                break;
+            case 'DELETE':
+                $marcaController->delete($id);
+                break;
+            default:
+                header("HTTP/1.1 405 Method Not Allowed");
+                echo json_encode(['error' => 'Método no permitido']);
+        }
+        break;
+    
 
-    switch ($method) {
-        case 'GET':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
+    case 'prendas':
+        switch ($request_method) {
+            case 'GET':
+                if (isset($segmentosDeUrl[0]) && $segmentosDeUrl[0] == 'vendidas') {
+                    $prendaController->getPrendasVendidas();
+                } else {
+                    $prendaController->get($id);
+                }
+                break;
+            case 'POST':
+                $prendaController->post();
+                break;
+            case 'PUT':
+                $prendaController->put($id);
+                break;
+            case 'DELETE':
+                $prendaController->delete($id);
+                break;
+            default:
+                header("HTTP/1.1 405 Method Not Allowed");
+                echo json_encode(['error' => 'Método no permitido']);
+        }
+        break;
 
-            if ($id !== null) {
-                $prendasController->ObtenerPorId($id);
-            } else {
-                $prendasController->ObtenerTodos();
-            }
-            break;
+    case 'ventas':
+        switch ($request_method) {
+            case 'GET':
+                $ventaController->get($id);
+                break;
+            case 'POST':
+                $ventaController->post();
+                break;
+            case 'PUT':
+                $ventaController->put($id);
+                break;
+            case 'DELETE':
+                $ventaController->delete($id);
+                break;
+            default:
+                header("HTTP/1.1 405 Method Not Allowed");
+                echo json_encode(['error' => 'Método no permitido']);
+        }
+        break;
 
-        case 'POST':
-            $prendasController->crear();
-            break;
-
-        case 'PUT':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-            $prendasController->actualizar($id);
-            break;
-
-        case 'DELETE':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-            $prendasController->eliminar($id);
-            break;
-
-        default:
-            echo json_encode(["Error" => "Método no implementado para prendas."]);
-    }
-}
-
-// Rutas para "marcas"
-if ($path == "marcas") {
-    $marcasController = new MarcasController();
-
-    switch ($method) {
-        case 'GET':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-
-            if ($id !== null) {
-                $marcasController->ObtenerPorId($id);
-            } else {
-                $marcasController->ObtenerTodos();
-            }
-            break;
-
-        case 'POST':
-            $marcasController->crear();
-            break;
-
-        case 'PUT':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-            $marcasController->actualizar($id);
-            break;
-
-        case 'DELETE':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-            $marcasController->eliminar($id);
-            break;
-
-        default:
-            echo json_encode(["Error" => "Método no implementado para marcas."]);
-    }
-}
-
-// Rutas para "ventas"
-if ($path == "ventas") {
-    $ventasController = new VentasController();
-
-    switch ($method) {
-        case 'GET':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-
-            if ($id !== null) {
-                $ventasController->ObtenerPorId($id);
-            } else {
-                $ventasController->ObtenerTodos();
-            }
-            break;
-
-        case 'POST':
-            $ventasController->crear();
-            break;
-
-        case 'PUT':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-            $ventasController->actualizar($id);
-            break;
-
-        case 'DELETE':
-            $id = isset($queryParams['id']) ? $queryParams['id'] : null;
-            $ventasController->eliminar($id);
-            break;
-
-        default:
-            echo json_encode(["Error" => "Método no implementado para ventas."]);
-    }
-}
-if ($path == "vistas/marcasconventas") {
-    if ($method == 'GET') {
-        $prendasController = new PrendasController();
-        $prendasController->reporteMarcasConVentas();
-    } else {
-        echo json_encode(["Error" => "Método no permitido para esta ruta."]);
-    }
-}
-
-if ($path == "vistas/prendasvendidasystock") {
-    if ($method == 'GET') {
-        $prendasController = new PrendasController();
-        $prendasController->reportePrendasVendidasYStock();
-    } else {
-        echo json_encode(["Error" => "Método no permitido para esta ruta."]);
-    }
-}
-
-if ($path == "vistas/top5marcasvendidas") {
-    if ($method == 'GET') {
-        $prendasController = new PrendasController();
-        $prendasController->reporteTop5MarcasVendidas();
-    } else {
-        echo json_encode(["Error" => "Método no permitido para esta ruta."]);
-    }
+    default:
+        header("HTTP/1.1 404 Not Found");
+        echo json_encode(['error' => 'Ruta no encontrada']);
+        break;
 }
 ?>
+
